@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${stock.id != null ? 'Edit Stock' : 'Create Stock'}">Stock Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 th:text="${stock.id != null ? 'Edit Stock' : 'Create New Stock'}">Stock Form</h1>
+        </header>
+
+        <form th:action="${stock.id != null ? '/stocks/update/' + stock.id : '/stocks'}" 
+              th:object="${stock}" 
+              method="post" 
+              class="stock-form">
+            
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" 
+                       id="name" 
+                       th:field="*{name}" 
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('name')} ? 'error' : ''">
+                <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" 
+                       id="quantity" 
+                       th:field="*{quantity}" 
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('quantity')} ? 'error' : ''">
+                <span class="error-message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" 
+                       id="price" 
+                       th:field="*{price}" 
+                       step="0.01"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('price')} ? 'error' : ''">
+                <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" 
+                          th:field="*{description}" 
+                          class="form-control"
+                          rows="4"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/stocks" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
