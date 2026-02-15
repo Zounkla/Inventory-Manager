@@ -2,7 +2,6 @@ package com.inventory.manager.service;
 
 import com.inventory.manager.model.Stock;
 import com.inventory.manager.repository.StockRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class StockService {
 
-    @Autowired
-    private StockRepository stockRepository;
+    private final StockRepository stockRepository;
+
+    public StockService(StockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
 
     public List<Stock> getAllStocks() {
         return stockRepository.findAll();

@@ -18,12 +18,12 @@ public class Stock {
     private String name;
 
     @NotNull(message = "Quantity is required")
-    @Min(value = 0, message = "Quantity must be positive or zero")
+    @Min(value = 0, message = "Quantity cannot be negative")
     @Column(nullable = false)
     private Integer quantity;
 
     @NotNull(message = "Price is required")
-    @Min(value = 0, message = "Price must be positive or zero")
+    @Min(value = 0, message = "Price cannot be negative")
     @Column(nullable = false)
     private Double price;
 
